@@ -49,7 +49,7 @@ __host__ __device__
 
 template<typename DerivedPolicy, typename Pointer>
 __host__ __device__
-  void return_temporary_buffer(thrust::execution_policy<DerivedPolicy> &exec, Pointer p)
+  void return_temporary_buffer(thrust::execution_policy<DerivedPolicy> &exec, Pointer p, std::ptrdiff_t)
 {
   thrust::free(exec, p);
 } // end return_temporary_buffer()

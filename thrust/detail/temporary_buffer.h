@@ -66,12 +66,12 @@ __host__ __device__
 __thrust_exec_check_disable__
 template<typename DerivedPolicy, typename Pointer>
 __host__ __device__
-  void return_temporary_buffer(const thrust::detail::execution_policy_base<DerivedPolicy> &exec, Pointer p)
+  void return_temporary_buffer(const thrust::detail::execution_policy_base<DerivedPolicy> &exec, Pointer p, std::ptrdiff_t n)
 {
   using thrust::detail::return_temporary_buffer; // execute_with_allocator
   using thrust::system::detail::generic::return_temporary_buffer;
 
-  return return_temporary_buffer(thrust::detail::derived_cast(thrust::detail::strip_const(exec)), p);
+  return return_temporary_buffer(thrust::detail::derived_cast(thrust::detail::strip_const(exec)), p, n);
 } // end return_temporary_buffer()
 
 
