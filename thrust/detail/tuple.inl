@@ -286,29 +286,10 @@ template <class HT, class TT>
        const tail_type& t)
     : head (h), tail(t) {}
 
-  template <class T1, class T2, class T3, class T4, class T5,
-            class T6, class T7, class T8, class T9, class T10>
-  inline __host__ __device__
-  cons( T1& t1, T2& t2, T3& t3, T4& t4, T5& t5,
-        T6& t6, T7& t7, T8& t8, T9& t9, T10& t10 )
-    : head (t1),
-      tail (t2, t3, t4, t5, t6, t7, t8, t9, t10)
-      {}
-
   template <class T1, class... Ts>
   inline __host__ __device__
   cons( T1& t1, Ts&... ts )
     : head (t1), tail (ts...) {}
-
-  template <class T2, class T3, class T4, class T5,
-            class T6, class T7, class T8, class T9, class T10>
-  inline __host__ __device__
-  cons( const null_type& /*t1*/, T2& t2, T3& t3, T4& t4, T5& t5,
-        T6& t6, T7& t7, T8& t8, T9& t9, T10& t10 )
-    : head (),
-      tail (t2, t3, t4, t5, t6, t7, t8, t9, t10)
-      {}
-
 
   template <class HT2, class TT2>
   inline __host__ __device__
@@ -398,25 +379,6 @@ template <class HT>
        const null_type& = null_type())
     : head (h) {}
 
-  template<class T1>
-  inline __host__ __device__
-  cons(T1& t1, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&)
-  : head (t1) {}
-
-  template<class T1>
-  inline __host__ __device__
-  cons(T1& t1, const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&)
-  : head (t1) {}
-
-  template<class T1>
-  inline __host__ __device__
-  cons(T1& t1)
-  : head (t1) {}
-
   inline __host__ __device__
   cons(const null_type&, const null_type&, const null_type&,
        const null_type&, const null_type&, const null_type&,
@@ -429,6 +391,10 @@ template <class HT>
        const null_type&, const null_type&, const null_type&,
        const null_type&, const null_type&, const null_type&)
   : head () {}
+
+  template<class T1, class... Ts>
+  inline __host__ __device__
+  cons(T1& t1, const Ts&...) : head (t1) {}
 
   inline __host__ __device__
   cons() : head () {}
