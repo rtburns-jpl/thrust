@@ -72,24 +72,19 @@ template<
     // XXX perhaps we should generalize to reference<T>
     //     we could captures reference<pair> this way
     __thrust_exec_check_disable__
-    template<typename U0, typename U1, typename U2,
-             typename U3, typename U4, typename U5,
-             typename U6, typename U7, typename U8,
-             typename U9,
+    template<typename... Us,
              typename Pointer, typename Derived>
     inline __host__ __device__
-// XXX gcc-4.2 crashes on is_assignable
-//    typename thrust::detail::enable_if<
-//      thrust::detail::is_assignable<
-//        super_t,
-//        const thrust::tuple<U0,U1,U2,U3,U4,U5,U6,U7,U8,U9>
-//      >::value,
-//      tuple_of_iterator_references &
-//    >::type
-    tuple_of_iterator_references &
-    operator=(const thrust::reference<thrust::tuple<U0,U1,U2,U3,U4,U5,U6,U7,U8,U9>, Pointer, Derived> &other)
+    typename thrust::detail::enable_if<
+      thrust::detail::is_assignable<
+        super_t,
+        const thrust::tuple<Us...>
+      >::value,
+      tuple_of_iterator_references &
+    >::type
+    operator=(const thrust::reference<thrust::tuple<Us...>, Pointer, Derived> &other)
     {
-      typedef thrust::tuple<U0,U1,U2,U3,U4,U5,U6,U7,U8,U9> tuple_type;
+      typedef thrust::tuple<Us...> tuple_type;
 
       // XXX perhaps this could be accelerated
       tuple_type other_tuple = other;
