@@ -633,174 +633,29 @@ get(const detail::cons<HT, TT>& c)
 }
 
 
-template<class T0>
+template<class... Ts>
 __host__ __device__ inline
-  typename detail::make_tuple_mapper<T0>::type
-    make_tuple(const T0& t0)
+  typename detail::make_tuple_mapper<Ts...>::type
+    make_tuple(const Ts&... ts)
 {
-  typedef typename detail::make_tuple_mapper<T0>::type t;
-  return t(t0);
-} // end make_tuple()
-
-template<class T0, class T1>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1>::type
-    make_tuple(const T0& t0, const T1& t1)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1>::type t;
-  return t(t0,t1);
-} // end make_tuple()
-
-template<class T0, class T1, class T2>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2>::type t;
-  return t(t0,t1,t2);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3>::type t;
-  return t(t0,t1,t2,t3);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3, class T4>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3,T4>::type t;
-  return t(t0,t1,t2,t3,t4);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3, class T4, class T5>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3,T4,T5>::type t;
-  return t(t0,t1,t2,t3,t4,t5);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3,T4,T5,T6>::type t;
-  return t(t0,t1,t2,t3,t4,t5,t6);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6, T7>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6, const T7& t7)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3,T4,T5,T6,T7>::type t;
-  return t(t0,t1,t2,t3,t4,t5,t6,t7);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6, T7, T8>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3,T4,T5,T6,T7,T8>::type t;
-  return t(t0,t1,t2,t3,t4,t5,t6,t7,t8);
-} // end make_tuple()
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8, class T9>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6, const T7& t7, const T8& t8, const T9& t9)
-{
-  typedef typename detail::make_tuple_mapper<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>::type t;
-  return t(t0,t1,t2,t3,t4,t5,t6,t7,t8,t9);
+  typedef typename detail::make_tuple_mapper<Ts...>::type t;
+  return t(ts...);
 } // end make_tuple()
 
 
-template<typename T0>
+template<typename... Ts>
 __host__ __device__ inline
-tuple<T0&> tie(T0 &t0)
+tuple<Ts&...> tie(Ts&... ts)
 {
-  return tuple<T0&>(t0);
-}
-
-template<typename T0,typename T1>
-__host__ __device__ inline
-tuple<T0&,T1&> tie(T0 &t0, T1 &t1)
-{
-  return tuple<T0&,T1&>(t0,t1);
-}
-
-template<typename T0,typename T1, typename T2>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&> tie(T0 &t0, T1 &t1, T2 &t2)
-{
-  return tuple<T0&,T1&,T2&>(t0,t1,t2);
-}
-
-template<typename T0,typename T1, typename T2, typename T3>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3)
-{
-  return tuple<T0&,T1&,T2&,T3&>(t0,t1,t2,t3);
-}
-
-template<typename T0,typename T1, typename T2, typename T3, typename T4>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4)
-{
-  return tuple<T0&,T1&,T2&,T3&,T4&>(t0,t1,t2,t3,t4);
-}
-
-template<typename T0,typename T1, typename T2, typename T3, typename T4, typename T5>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5)
-{
-  return tuple<T0&,T1&,T2&,T3&,T4&,T5&>(t0,t1,t2,t3,t4,t5);
-}
-
-template<typename T0,typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6)
-{
-  return tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&>(t0,t1,t2,t3,t4,t5,t6);
-}
-
-template<typename T0,typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6, T7 &t7)
-{
-  return tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&>(t0,t1,t2,t3,t4,t5,t6,t7);
-}
-
-template<typename T0,typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&,T8&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6, T7 &t7, T8 &t8)
-{
-  return tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&,T8&>(t0,t1,t2,t3,t4,t5,t6,t7,t8);
-}
-
-template<typename T0,typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&,T8&,T9&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6, T7 &t7, T8 &t8, T9 &t9)
-{
-  return tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&,T8&,T9&>(t0,t1,t2,t3,t4,t5,t6,t7,t8,t9);
+  return tuple<Ts&...>(ts...);
 }
 
 template<
-  typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9,
-  typename U0, typename U1, typename U2, typename U3, typename U4, typename U5, typename U6, typename U7, typename U8, typename U9
+  typename... Ts, typename... Us
 >
 __host__ __device__ inline
-void swap(thrust::tuple<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9> &x,
-          thrust::tuple<U0,U1,U2,U3,U4,U5,U6,U7,U8,U9> &y)
+void swap(thrust::tuple<Ts...> &x,
+          thrust::tuple<Us...> &y)
 {
   return x.swap(y);
 }

@@ -411,57 +411,25 @@ public:
  */
 
 
-/*! This version of \p make_tuple creates a new \c tuple object from a
- *  single object.
+/*! This version of \p make_tuple creates a new \c tuple object from objects.
  *
- *  \param t0 The object to copy from.
- *  \return A \p tuple object with a single member which is a copy of \p t0.
+ *  \param ts The objects to copy from.
+ *  \return A \p tuple object with members which are copies of \p ts.
  */
-template<class T0>
+template<class... Ts>
 __host__ __device__ inline
-  typename detail::make_tuple_mapper<T0>::type
-    make_tuple(const T0& t0);
-
-/*! This version of \p make_tuple creates a new \c tuple object from two
- *  objects.
- *
- *  \param t0 The first object to copy from.
- *  \param t1 The second object to copy from.
- *  \return A \p tuple object with two members which are copies of \p t0
- *          and \p t1.
- *
- *  \note \p make_tuple has ten variants, the rest of which are omitted here
- *        for brevity.
- */
-template<class T0, class T1>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1>::type
-    make_tuple(const T0& t0, const T1& t1);
-
-/*! This version of \p tie creates a new \c tuple whose single element is
- *  a reference which refers to this function's argument.
- *
- *  \param t0 The object to reference.
- *  \return A \p tuple object with one member which is a reference to \p t0.
- */
-template<typename T0>
-__host__ __device__ inline
-tuple<T0&> tie(T0& t0);
+  typename detail::make_tuple_mapper<Ts...>::type
+    make_tuple(const Ts&... ts);
 
 /*! This version of \p tie creates a new \c tuple of references object which
  *  refers to this function's arguments.
  *
- *  \param t0 The first object to reference.
- *  \param t1 The second object to reference.
- *  \return A \p tuple object with two members which are references to \p t0
- *          and \p t1.
- *
- *  \note \p tie has ten variants, the rest of which are omitted here for
- *           brevity.
+ *  \param ts The objects to reference.
+ *  \return A \p tuple object with members which are references to \p ts.
  */
-template<typename T0, typename T1>
+template<typename... Ts>
 __host__ __device__ inline
-tuple<T0&,T1&> tie(T0& t0, T1& t1);
+tuple<Ts&...> tie(Ts&... ts);
 
 /*! \p swap swaps the contents of two <tt>tuple</tt>s.
  *
@@ -469,90 +437,16 @@ tuple<T0&,T1&> tie(T0& t0, T1& t1);
  *  \param y The second \p tuple to swap.
  */
 template<
-  typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9,
-  typename U0, typename U1, typename U2, typename U3, typename U4, typename U5, typename U6, typename U7, typename U8, typename U9
+  typename... Ts, typename... Us
 >
 inline __host__ __device__
-void swap(tuple<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9> &x,
-          tuple<U0,U1,U2,U3,U4,U5,U6,U7,U8,U9> &y);
+void swap(tuple<Ts...> &x,
+          tuple<Us...> &y);
 
 
 
 /*! \cond
  */
-
-template<class T0, class T1, class T2>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2);
-
-template<class T0, class T1, class T2, class T3>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3);
-
-template<class T0, class T1, class T2, class T3, class T4>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4);
-
-template<class T0, class T1, class T2, class T3, class T4, class T5>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5);
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6);
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6, T7>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6, const T7& t7);
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6, T7, T8>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6, const T7& t7, const T8& t8);
-
-template<class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8, class T9>
-__host__ __device__ inline
-  typename detail::make_tuple_mapper<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>::type
-    make_tuple(const T0& t0, const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5, const T6& t6, const T7& t7, const T8& t8, const T9& t9);
-
-template<typename T0, typename T1, typename T2>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&> tie(T0 &t0, T1 &t1, T2 &t2);
-
-template<typename T0, typename T1, typename T2, typename T3>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3);
-
-template<typename T0, typename T1, typename T2, typename T3, typename T4>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4);
-
-template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5);
-
-template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6);
-
-template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6, T7 &t7);
-
-template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&,T8&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6, T7 &t7, T8 &t8);
-
-template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-__host__ __device__ inline
-tuple<T0&,T1&,T2&,T3&,T4&,T5&,T6&,T7&,T8&,T9&> tie(T0 &t0, T1 &t1, T2 &t2, T3 &t3, T4 &t4, T5 &t5, T6 &t6, T7 &t7, T8 &t8, T9 &t9);
-
 
 __host__ __device__ inline
 bool operator==(const null_type&, const null_type&);
