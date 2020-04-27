@@ -292,8 +292,13 @@ template <class HT, class TT>
   cons( T1& t1, T2& t2, T3& t3, T4& t4, T5& t5,
         T6& t6, T7& t7, T8& t8, T9& t9, T10& t10 )
     : head (t1),
-      tail (t2, t3, t4, t5, t6, t7, t8, t9, t10, static_cast<const null_type&>(null_type()))
+      tail (t2, t3, t4, t5, t6, t7, t8, t9, t10)
       {}
+
+  template <class T1, class... Ts>
+  inline __host__ __device__
+  cons( T1& t1, Ts&... ts )
+    : head (t1), tail (ts...) {}
 
   template <class T2, class T3, class T4, class T5,
             class T6, class T7, class T8, class T9, class T10>
@@ -301,7 +306,7 @@ template <class HT, class TT>
   cons( const null_type& /*t1*/, T2& t2, T3& t3, T4& t4, T5& t5,
         T6& t6, T7& t7, T8& t8, T9& t9, T10& t10 )
     : head (),
-      tail (t2, t3, t4, t5, t6, t7, t8, t9, t10, static_cast<const null_type&>(null_type()))
+      tail (t2, t3, t4, t5, t6, t7, t8, t9, t10)
       {}
 
 
@@ -389,12 +394,16 @@ template <class HT>
   null_type get_tail() const { return null_type(); }
 
   inline __host__ __device__
-  cons() : head() {}
-
-  inline __host__ __device__
   cons(typename access_traits<stored_head_type>::parameter_type h,
        const null_type& = null_type())
     : head (h) {}
+
+  template<class T1>
+  inline __host__ __device__
+  cons(T1& t1, const null_type&, const null_type&,
+       const null_type&, const null_type&, const null_type&,
+       const null_type&, const null_type&, const null_type&)
+  : head (t1) {}
 
   template<class T1>
   inline __host__ __device__
@@ -403,12 +412,26 @@ template <class HT>
        const null_type&, const null_type&, const null_type&)
   : head (t1) {}
 
+  template<class T1>
+  inline __host__ __device__
+  cons(T1& t1)
+  : head (t1) {}
+
+  inline __host__ __device__
+  cons(const null_type&, const null_type&, const null_type&,
+       const null_type&, const null_type&, const null_type&,
+       const null_type&, const null_type&, const null_type&)
+  : head () {}
+
   inline __host__ __device__
   cons(const null_type&,
        const null_type&, const null_type&, const null_type&,
        const null_type&, const null_type&, const null_type&,
        const null_type&, const null_type&, const null_type&)
   : head () {}
+
+  inline __host__ __device__
+  cons() : head () {}
 
   template <class HT2>
   inline __host__ __device__
