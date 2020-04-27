@@ -355,8 +355,7 @@ template <class T0, class T1, class T2, class T3, class T4,
  */
 
 template <>
-class tuple<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>  :
-  public null_type
+class tuple<> : public null_type
 {
 public:
   typedef null_type inherited;
