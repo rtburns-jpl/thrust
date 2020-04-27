@@ -379,19 +379,6 @@ template <class HT>
        const null_type& = null_type())
     : head (h) {}
 
-  inline __host__ __device__
-  cons(const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&)
-  : head () {}
-
-  inline __host__ __device__
-  cons(const null_type&,
-       const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&,
-       const null_type&, const null_type&, const null_type&)
-  : head () {}
-
   template<class T1, class... Ts>
   inline __host__ __device__
   cons(T1& t1, const Ts&...) : head (t1) {}
@@ -452,17 +439,68 @@ template <class HT>
   }
 }; // end cons
 
-template <class T0, class T1, class T2, class T3, class T4,
-          class T5, class T6, class T7, class T8, class T9>
-  struct map_tuple_to_cons
+template <class... Ts>
+  struct map_tuple_to_cons;
+
+template <class T, class... Ts>
+  struct map_tuple_to_cons<T, Ts...>
 {
-  typedef cons<T0,
-               typename map_tuple_to_cons<T1, T2, T3, T4, T5,
-                                          T6, T7, T8, T9, null_type>::type
+  typedef cons<T,
+               typename map_tuple_to_cons<Ts...>::type
               > type;
 }; // end map_tuple_to_cons
 
 // The empty tuple is a null_type
+template <>
+  struct map_tuple_to_cons<>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
+template <>
+  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>
+{
+  typedef null_type type;
+}; // end map_tuple_to_cons<...>
 template <>
   struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>
 {
@@ -553,23 +591,11 @@ struct make_tuple_traits<const volatile T[n]> {
 // a helper traits to make the make_tuple functions shorter (Vesa Karvonen's
 // suggestion)
 template <
-  class T0 = null_type, class T1 = null_type, class T2 = null_type,
-  class T3 = null_type, class T4 = null_type, class T5 = null_type,
-  class T6 = null_type, class T7 = null_type, class T8 = null_type,
-  class T9 = null_type
+  class... Ts
 >
 struct make_tuple_mapper {
   typedef
-    tuple<typename make_tuple_traits<T0>::type,
-          typename make_tuple_traits<T1>::type,
-          typename make_tuple_traits<T2>::type,
-          typename make_tuple_traits<T3>::type,
-          typename make_tuple_traits<T4>::type,
-          typename make_tuple_traits<T5>::type,
-          typename make_tuple_traits<T6>::type,
-          typename make_tuple_traits<T7>::type,
-          typename make_tuple_traits<T8>::type,
-          typename make_tuple_traits<T9>::type> type;
+    tuple<typename make_tuple_traits<Ts>::type...> type;
 };
 
 } // end detail
