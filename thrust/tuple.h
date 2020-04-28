@@ -259,20 +259,6 @@ template <class... Ts>
   }
 };
 
-/*! \cond
- */
-
-template <>
-class tuple<> : public null_type
-{
-public:
-  typedef null_type inherited;
-};
-
-/*! \endcond
- */
-
-
 /*! This version of \p make_tuple creates a new \c tuple object from objects.
  *
  *  \param ts The objects to copy from.
@@ -305,31 +291,6 @@ inline __host__ __device__
 void swap(tuple<Ts...> &x,
           tuple<Us...> &y);
 
-
-
-/*! \cond
- */
-
-__host__ __device__ inline
-bool operator==(const null_type&, const null_type&);
-
-__host__ __device__ inline
-bool operator>=(const null_type&, const null_type&);
-
-__host__ __device__ inline
-bool operator<=(const null_type&, const null_type&);
-
-__host__ __device__ inline
-bool operator!=(const null_type&, const null_type&);
-
-__host__ __device__ inline
-bool operator<(const null_type&, const null_type&);
-
-__host__ __device__ inline
-bool operator>(const null_type&, const null_type&);
-
-/*! \endcond
- */
 
 /*! \} // tuple
  */
