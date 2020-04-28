@@ -26,18 +26,14 @@ namespace thrust
 namespace detail
 {
 
-  
 template<
-  typename T0, typename T1, typename T2,
-  typename T3, typename T4, typename T5,
-  typename T6, typename T7, typename T8,
-  typename T9
+  typename... Ts
 >
   class tuple_of_iterator_references
-    : public thrust::tuple<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>
+    : public thrust::tuple<Ts...>
 {
   private:
-    typedef thrust::tuple<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9> super_t;
+    typedef thrust::tuple<Ts...> super_t;
 
   public:
     // allow implicit construction from tuple<refs>
@@ -98,98 +94,8 @@ template<
     tuple_of_iterator_references() {}
 
     inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0)
-      : super_t(t0)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1)
-      : super_t(t0, t1)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2)
-      : super_t(t0, t1, t2)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3)
-      : super_t(t0, t1, t2, t3)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3,
-                                 typename access_traits<T4>::parameter_type t4)
-      : super_t(t0, t1, t2, t3, t4)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3,
-                                 typename access_traits<T4>::parameter_type t4,
-                                 typename access_traits<T5>::parameter_type t5)
-      : super_t(t0, t1, t2, t3, t4, t5)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3,
-                                 typename access_traits<T4>::parameter_type t4,
-                                 typename access_traits<T5>::parameter_type t5,
-                                 typename access_traits<T6>::parameter_type t6)
-      : super_t(t0, t1, t2, t3, t4, t5, t6)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3,
-                                 typename access_traits<T4>::parameter_type t4,
-                                 typename access_traits<T5>::parameter_type t5,
-                                 typename access_traits<T6>::parameter_type t6,
-                                 typename access_traits<T7>::parameter_type t7)
-      : super_t(t0, t1, t2, t3, t4, t5, t6, t7)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3,
-                                 typename access_traits<T4>::parameter_type t4,
-                                 typename access_traits<T5>::parameter_type t5,
-                                 typename access_traits<T6>::parameter_type t6,
-                                 typename access_traits<T7>::parameter_type t7,
-                                 typename access_traits<T8>::parameter_type t8)
-      : super_t(t0, t1, t2, t3, t4, t5, t6, t7, t8)
-    {}
-
-    inline __host__ __device__
-    tuple_of_iterator_references(typename access_traits<T0>::parameter_type t0,
-                                 typename access_traits<T1>::parameter_type t1,
-                                 typename access_traits<T2>::parameter_type t2,
-                                 typename access_traits<T3>::parameter_type t3,
-                                 typename access_traits<T4>::parameter_type t4,
-                                 typename access_traits<T5>::parameter_type t5,
-                                 typename access_traits<T6>::parameter_type t6,
-                                 typename access_traits<T7>::parameter_type t7,
-                                 typename access_traits<T8>::parameter_type t8,
-                                 typename access_traits<T9>::parameter_type t9)
-      : super_t(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9)
+    tuple_of_iterator_references(typename access_traits<Ts>::parameter_type... ts)
+      : super_t(ts...)
     {}
 };
 

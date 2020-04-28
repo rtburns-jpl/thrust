@@ -192,16 +192,15 @@ get(const detail::cons<HT, TT>& t);
  *  \see tuple_size
  *  \see tie
  */
-template <class T0, class T1, class T2, class T3, class T4,
-          class T5, class T6, class T7, class T8, class T9>
+template <class... Ts>
   class tuple :
-    public detail::map_tuple_to_cons<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>::type
+    public detail::map_tuple_to_cons<Ts...>::type
 {
   /*! \cond
    */
 
   private:
-  typedef typename detail::map_tuple_to_cons<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>::type inherited;
+  typedef typename detail::map_tuple_to_cons<Ts...>::type inherited;
 
   /*! \endcond
    */
@@ -212,103 +211,12 @@ template <class T0, class T1, class T2, class T3, class T4,
   inline __host__ __device__
   tuple(void) {}
 
-  /*! \p tuple's one-argument constructor copy constructs the first element from the given parameter
-   *     and intializes all other elements.
-   *  \param t0 The value to assign to this \p tuple's first element.
+  /*! \p tuple's constructor copy constructs the elements from the given parameters
+   *  \param ts The value to assign to this \p tuple's elements.
    */
-  inline __host__ __device__ 
-  tuple(typename access_traits<T0>::parameter_type t0)
-    : inherited(t0) {}
-
-  /*! \p tuple's one-argument constructor copy constructs the first two elements from the given parameters
-   *     and intializes all other elements.
-   *  \param t0 The value to assign to this \p tuple's first element.
-   *  \param t1 The value to assign to this \p tuple's second element.
-   *  \note \p tuple's constructor has ten variants of this form, the rest of which are ommitted here for brevity.
-   */
-  inline __host__ __device__ 
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1)
-    : inherited(t0, t1) {}
-
-  /*! \cond
-   */
-
   inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2)
-    : inherited(t0, t1, t2) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3)
-    : inherited(t0, t1, t2, t3) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3,
-        typename access_traits<T4>::parameter_type t4)
-    : inherited(t0, t1, t2, t3, t4) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3,
-        typename access_traits<T4>::parameter_type t4,
-        typename access_traits<T5>::parameter_type t5)
-    : inherited(t0, t1, t2, t3, t4, t5) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3,
-        typename access_traits<T4>::parameter_type t4,
-        typename access_traits<T5>::parameter_type t5,
-        typename access_traits<T6>::parameter_type t6)
-    : inherited(t0, t1, t2, t3, t4, t5, t6) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3,
-        typename access_traits<T4>::parameter_type t4,
-        typename access_traits<T5>::parameter_type t5,
-        typename access_traits<T6>::parameter_type t6,
-        typename access_traits<T7>::parameter_type t7)
-    : inherited(t0, t1, t2, t3, t4, t5, t6, t7) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3,
-        typename access_traits<T4>::parameter_type t4,
-        typename access_traits<T5>::parameter_type t5,
-        typename access_traits<T6>::parameter_type t6,
-        typename access_traits<T7>::parameter_type t7,
-        typename access_traits<T8>::parameter_type t8)
-    : inherited(t0, t1, t2, t3, t4, t5, t6, t7, t8) {}
-
-  inline __host__ __device__
-  tuple(typename access_traits<T0>::parameter_type t0,
-        typename access_traits<T1>::parameter_type t1,
-        typename access_traits<T2>::parameter_type t2,
-        typename access_traits<T3>::parameter_type t3,
-        typename access_traits<T4>::parameter_type t4,
-        typename access_traits<T5>::parameter_type t5,
-        typename access_traits<T6>::parameter_type t6,
-        typename access_traits<T7>::parameter_type t7,
-        typename access_traits<T8>::parameter_type t8,
-        typename access_traits<T9>::parameter_type t9)
-    : inherited(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9) {}
+  tuple(typename access_traits<Ts>::parameter_type... ts)
+    : inherited(ts...) {}
 
 
   template<class U1, class U2>

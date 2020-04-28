@@ -44,10 +44,7 @@ bool operator>(const null_type&, const null_type&) { return false; }
 
 // forward declaration for tuple
 template <
-  class T0 = null_type, class T1 = null_type, class T2 = null_type,
-  class T3 = null_type, class T4 = null_type, class T5 = null_type,
-  class T6 = null_type, class T7 = null_type, class T8 = null_type,
-  class T9 = null_type>
+  class... Ts>
 class tuple;
 
 // forward declaration of tuple_element
@@ -85,6 +82,18 @@ template<class T> struct tuple_size;
 // specializations for tuple_size
 template<>
   struct tuple_size< tuple<> >
+{
+  static const int value = 0;
+}; // end tuple_size< tuple<> >
+
+template<>
+  struct tuple_size< tuple<null_type> >
+{
+  static const int value = 0;
+}; // end tuple_size< tuple<> >
+
+template<>
+  struct tuple_size< tuple<null_type, null_type> >
 {
   static const int value = 0;
 }; // end tuple_size< tuple<> >
