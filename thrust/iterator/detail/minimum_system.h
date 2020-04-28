@@ -24,49 +24,25 @@
 namespace thrust
 {
 namespace detail
-{ 
-
+{
 
 template<typename... Ts>
   struct unrelated_systems {};
 
-template<typename... Ts>
-struct minimum_system_padded
-  : thrust::detail::eval_if<
-      is_metafunction_defined<
-        minimum_type<Ts...>
-      >::value,
-      minimum_type<Ts...>,
-      thrust::detail::identity_<
-        unrelated_systems<Ts...>
-      >
-    >
-{};
-
-
 // if a minimum system exists for these arguments, return it
 // otherwise, collect the arguments and report them as unrelated
-template<typename T1,
-         typename T2  = minimum_type_detail::any_conversion,
-         typename T3  = minimum_type_detail::any_conversion,
-         typename T4  = minimum_type_detail::any_conversion,
-         typename T5  = minimum_type_detail::any_conversion,
-         typename T6  = minimum_type_detail::any_conversion,
-         typename T7  = minimum_type_detail::any_conversion,
-         typename T8  = minimum_type_detail::any_conversion,
-         typename T9  = minimum_type_detail::any_conversion,
-         typename T10 = minimum_type_detail::any_conversion,
-         typename T11 = minimum_type_detail::any_conversion,
-         typename T12 = minimum_type_detail::any_conversion,
-         typename T13 = minimum_type_detail::any_conversion,
-         typename T14 = minimum_type_detail::any_conversion,
-         typename T15 = minimum_type_detail::any_conversion,
-         typename T16 = minimum_type_detail::any_conversion>
+template<typename... Ts>
   struct minimum_system
-    : minimum_system_padded<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16>
+    : thrust::detail::eval_if<
+        is_metafunction_defined<
+          minimum_type<Ts...>
+        >::value,
+        minimum_type<Ts...>,
+        thrust::detail::identity_<
+          unrelated_systems<Ts...>
+        >
+      >
 {}; // end minimum_system
-
 
 } // end detail
 } // end thrust
-
