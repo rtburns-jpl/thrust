@@ -24,42 +24,22 @@ namespace thrust
 namespace detail
 {
 
-/* TODO can be simplified without null_type padding */
-
 template<typename Tuple,
          template<typename> class UnaryMetaFunction,
-         typename Indices>
-  struct tuple_meta_transform_impl;
+         typename Ixs = std::make_index_sequence<
+             thrust::tuple_size<Tuple>::value>>
+  struct tuple_meta_transform;
 
 template<typename Tuple,
          template<typename> class UnaryMetaFunction,
          size_t... Is>
-  struct tuple_meta_transform_impl<Tuple,
-                                   UnaryMetaFunction,
-                                   std::index_sequence<Is...>>
+  struct tuple_meta_transform<Tuple, UnaryMetaFunction,
+                              std::index_sequence<Is...>>
 {
   typedef thrust::tuple<
     typename UnaryMetaFunction<typename
-      thrust::tuple_element<Is,Tuple>::type>::type...
+      tuple_element<Is, Tuple>::type>::type...
   > type;
-};
-
-template<typename Tuple,
-         template<typename> class UnaryMetaFunction,
-         unsigned int sz = thrust::tuple_size<Tuple>::value,
-         typename Ixs = std::make_index_sequence<sz>>
-  struct tuple_meta_transform
-{
-  typedef
-    typename tuple_meta_transform_impl<Tuple, UnaryMetaFunction, Ixs>::type
-    type;
-};
-
-template<typename Tuple,
-         template<typename> class UnaryMetaFunction>
-  struct tuple_meta_transform<Tuple,UnaryMetaFunction,0>
-{
-  typedef null_type type;
 };
 
 } // end detail
