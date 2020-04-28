@@ -93,12 +93,6 @@ template<>
 }; // end tuple_size< tuple<> >
 
 template<>
-  struct tuple_size< tuple<null_type, null_type> >
-{
-  static const int value = 0;
-}; // end tuple_size< tuple<> >
-
-template<>
   struct tuple_size<null_type>
 {
   static const int value = 0;
