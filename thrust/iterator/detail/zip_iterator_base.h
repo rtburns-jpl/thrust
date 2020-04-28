@@ -206,11 +206,6 @@ Fun tuple_for_each(Tuple& t, Fun f)
 // No point in bringing in a bunch of #ifdefs here. This is
 // going to go away with the next tuple implementation anyway.
 //
-__host__ __device__
-inline bool tuple_equal(thrust::null_type, thrust::null_type)
-{ return true; }
-
-
 template<typename Tuple1, typename Tuple2>
 __host__ __device__
 bool tuple_equal(Tuple1 const& t1, Tuple2 const& t2)
