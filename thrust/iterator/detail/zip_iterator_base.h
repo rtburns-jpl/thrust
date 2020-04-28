@@ -292,25 +292,17 @@ struct minimum_system_in_iterator_tuple
 namespace zip_iterator_base_ns
 {
 
-template<typename T>
-struct wrap_toir;
+template<typename IteratorTuple>
+  struct tuple_of_iterator_references;
 
 template<typename... Ts>
-struct wrap_toir<tuple<Ts...>> {
-    typedef thrust::detail::tuple_of_iterator_references<Ts...> type;
-};
-
-template<typename IteratorTuple>
-  struct tuple_of_iterator_references
+  struct tuple_of_iterator_references<tuple<Ts...>>
 {
-  // get a thrust::tuple of the iterators' references
-  typedef typename tuple_meta_transform<
-    IteratorTuple,
-    iterator_reference
-  >::type tuple_of_references;
-
-  // map thrust::tuple<T...> to tuple_of_iterator_references<T...>
-  typedef typename wrap_toir<tuple_of_references>::type type;
+  typedef typename
+    // map thrust::tuple<T...> to tuple_of_iterator_references<T...>
+    thrust::detail::tuple_of_iterator_references<typename
+      iterator_reference<Ts>::type...>
+    type;
 };
 
 
