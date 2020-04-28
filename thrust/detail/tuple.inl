@@ -465,57 +465,6 @@ template <>
 {
   typedef null_type type;
 }; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-template <>
-  struct map_tuple_to_cons<null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type, null_type>
-{
-  typedef null_type type;
-}; // end map_tuple_to_cons<...>
-
 
 
 // ---------------------------------------------------------------------------
