@@ -339,7 +339,7 @@ struct TestTupleTieFunctor
 
     bool result = true;
 
-    T data[10];
+    T data[11];
     clear(data);
 
     // 17 and not 0 to avoid triggering custom_numeric's `operator void *` and a comparison with a null pointer
@@ -428,6 +428,20 @@ struct TestTupleTieFunctor
     result &= data[7] == 7;
     result &= data[8] == 8;
     result &= data[9] == 9;
+    clear(data);
+
+    tie(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10]) = make_tuple(17,1,2,3,4,5,6,7,8,9,10);
+    result &= data[0] == 17;
+    result &= data[1] == 1;
+    result &= data[2] == 2;
+    result &= data[3] == 3;
+    result &= data[4] == 4;
+    result &= data[5] == 5;
+    result &= data[6] == 6;
+    result &= data[7] == 7;
+    result &= data[8] == 8;
+    result &= data[9] == 9;
+    result &= data[10] == 10;
     clear(data);
 
     return result;
